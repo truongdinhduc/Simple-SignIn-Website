@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 20vh;
+    bottom: 20vh;
+    left: 0;
+    right: 0;
+    .form {
+        padding: 30px 30px;
+        border-radius: 20px;
+        background-color: #0a0a0a58;
+    
+        .tab-label {
+            color: whitesmoke;
+            font-size: 30px;
+            font-weight: 700;
+        }
+    
+        .input {
+            width: 300px;
+        }
+
+        :global(.ant-tabs-ink-bar){
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 3%, #FFCC70 99%);
+        }
+    }
+}
+
+.option {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    span {
+        color: white;
+        &:hover {
+            color: #C850C0;
+            cursor: pointer;
+        }
+    }
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    color: white;
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    padding: 10px 0;
+    border-radius: 20px;
+    height: 40px;
+    &:hover {
+        cursor: pointer;
+        background-color: #C850C0;
+        background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 3%, #FFCC70 99%);
+    }
+}
+
+.input-label {
+    color: white;
+    margin-bottom: 5px;
+}
