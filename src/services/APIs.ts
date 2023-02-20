@@ -2,8 +2,8 @@ import axios from 'axios'
 import { getClientCookies } from './Cookies'
 const qs = require('querystringify')
 
-export const BASE_URL = 'http://192.168.2.12:5050'
-//export const BASE_URL = 'https://truongdinhduc.api.up.railway.app/'
+//export const BASE_URL = 'http://192.168.2.12:5050'
+export const BASE_URL = 'https://truongdinhduc.api.up.railway.app/'
 
 export const Create = (baseURL = BASE_URL) => {
 

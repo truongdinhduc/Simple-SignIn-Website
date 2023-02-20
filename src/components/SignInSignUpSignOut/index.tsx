@@ -6,6 +6,7 @@ import styles from './styles.module.scss'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
 import SignOutForm from './SignOutForm'
+import { LoadingOutlined } from '@ant-design/icons';
 
 export default function SignInAndSignUpForm() {
     const dispatch = useDispatch()
@@ -17,43 +18,45 @@ export default function SignInAndSignUpForm() {
 
     return (
         <div className={styles['container']}>
-            <div className={styles['form']}>
-                {myInformation?.username ?
-                    <Tabs
-                        className={styles['tab']}
-                        centered={true}
-                        items={[
-                            {
-                                label: <div className={styles['tab-label']}>Your information</div>,
-                                key: '1',
-                                children: <SignOutForm />
-                            },
-                        ]}
-                    />
-                    :
-                    <Tabs
-                        className={styles['tab']}
-                        onChange={(tabKey) => { setActiveKey(tabKey) }}
-                        activeKey={activeKey}
-                        centered={true}
-                        style={{
-                            height: '100%'
-                        }}
-                        items={[
-                            {
-                                label: <div className={styles['tab-label']}>Sign in</div>,
-                                key: '1',
-                                children: <SignInForm changeForm={() => { setActiveKey('2') }} />
-                            },
-                            {
-                                label: <div className={styles['tab-label']}>Sign up</div>,
-                                key: '2',
-                                children: <SignUpForm />
-                            }
-                        ]}
-                    />
-                }
-            </div>
+            {isLoading ? <div className={styles['loading']}><LoadingOutlined /></div> :
+                <div className={styles['form']}>
+                    {myInformation?.username ?
+                        <Tabs
+                            className={styles['tab']}
+                            centered={true}
+                            items={[
+                                {
+                                    label: <div className={styles['tab-label']}>Your information</div>,
+                                    key: '1',
+                                    children: <SignOutForm />
+                                },
+                            ]}
+                        />
+                        :
+                        <Tabs
+                            className={styles['tab']}
+                            onChange={(tabKey) => { setActiveKey(tabKey) }}
+                            activeKey={activeKey}
+                            centered={true}
+                            style={{
+                                height: '100%'
+                            }}
+                            items={[
+                                {
+                                    label: <div className={styles['tab-label']}>Sign in</div>,
+                                    key: '1',
+                                    children: <SignInForm changeForm={() => { setActiveKey('2') }} />
+                                },
+                                {
+                                    label: <div className={styles['tab-label']}>Sign up</div>,
+                                    key: '2',
+                                    children: <SignUpForm />
+                                }
+                            ]}
+                        />
+                    }
+                </div>
+            }
         </div>
     )
 }

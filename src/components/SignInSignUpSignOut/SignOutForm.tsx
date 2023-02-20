@@ -82,7 +82,7 @@ export default function SignOutForm(props: SignOutFormProps) {
             >
                 <Input
                     className={styles['input']}
-                    type='text'
+                    type='password'
                     placeholder='Token'
                     disabled
                 />

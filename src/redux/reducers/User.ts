@@ -7,7 +7,7 @@ const getMyInformation = createAction<any>('user/getMyInformation')
 
 const reducer = createReducer(
     {
-        myInformation: {},
+        myInformation: { isLoading: true },
         signIn: {},
         signUp: {}
     },

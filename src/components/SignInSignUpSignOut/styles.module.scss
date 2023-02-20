@@ -31,6 +31,17 @@
         :global(.ant-tabs-tabpane){
             height: 100%;
         }
+        :global(.ant-input-disabled){
+            color: white;
+        }
+    }
+
+    .loading {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        font-size: 50px;
+        color: white;
     }
 }
 

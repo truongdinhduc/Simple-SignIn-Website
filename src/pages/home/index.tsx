@@ -5,9 +5,6 @@ import SignInSignUpSignOut from '../../components/SignInSignUpSignOut'
 
 export default function Home() {
     const dispatch = useDispatch()
-    const { res } = useSelector<RootState, any>(
-        (state) => state.user?.myInformation ?? {}
-    )
 
     useEffect(()=>{
         dispatch({ type: 'getMyInformation', payload: {} })
