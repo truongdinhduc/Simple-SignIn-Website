@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 declare var google: any;
 
@@ -7,14 +8,14 @@ export declare interface SignInWithGoogleProps {
 }
 export default function SignInWithGoogle(props: SignInWithGoogleProps): JSX.Element {
     const { } = props;
+    const dispatch = useDispatch()
     
     const handleCredentialResponse = (response:any) => {
         const payload = {
             client_id: response?.client_id,
             id_token: response?.credential
         }
-        //dispatch(getAction('authorizeWithGoogle')(payload))
-        console.log('dinhduc', payload)
+        dispatch({ type: 'signInWithGoogle', payload: payload })
     }
     useEffect(()=>{
         google.accounts.id.initialize({

@@ -41,11 +41,14 @@ export const Create = (baseURL = BASE_URL) => {
 
     // Your api down here - Never deleting this line
     /* User */
-    const signUp = (payload: any) =>
-        api.post(`api/v1/user/sign-up`, payload, {})
-
     const signIn = (payload: any) =>
         api.post(`api/v1/user/sign-in`, payload, {})
+
+    const signInWithGoogle = (payload: any) =>
+        api.post(`api/v1/user/sign-in-with-google`, payload, {})
+
+    const signUp = (payload: any) =>
+        api.post(`api/v1/user/sign-up`, payload, {})
 
     const getMyInformation = (payload: any) =>
         api.get(`api/v1/user/my-information`, getAuthorization(payload))
@@ -56,8 +59,9 @@ export const Create = (baseURL = BASE_URL) => {
         PUT,
         DELETE,
         // exports - Never deleting this line
-        signUp,
         signIn,
+        signInWithGoogle,
+        signUp,
         getMyInformation
     }
 }

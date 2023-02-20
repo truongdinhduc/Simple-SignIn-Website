@@ -51,6 +51,53 @@ function* signIn(api: any, action: any) {
     }
 }
 
+function* signInWithGoogle(api: any, action: any) {
+    const { payload } = action;
+    try {
+        yield put({ 
+            type: 'user/signInWithGoogle', 
+            payload: {
+                isLoading: true
+            }
+        });
+        console.log(payload)
+        const response: AxiosResponse = yield call(api.signInWithGoogle, payload);
+        
+        if (callAPISuccessfully(response)){
+            yield put({ 
+                type: 'user/signInWithGoogle', 
+                payload: {
+                    res: response?.data?.data,
+                    isLoading: false,
+                    isError: false
+                }
+            });
+
+            if (response?.data?.data?.token){
+                setClientCookies('token', response?.data?.data?.token)
+                toastSuccess('Sign in successfully.')
+                yield put({ 
+                    type: 'getMyInformation', 
+                    payload: {}
+                });
+            }
+        }
+        else {
+            yield put({ 
+                type: 'user/signInWithGoogle', 
+                payload: { isLoading: false, isError: true }
+            });
+        }
+        
+    } catch (error: Error | AxiosError | any) {
+        yield put({ 
+            type: 'user/signInWithGoogle', 
+            payload: { isLoading: false, isError: true }
+        });
+        toastError(error?.response?.data?.error)
+    }
+}
+
 function* signUp(api: any, action: any) {
     const { payload } = action;
     try {
@@ -140,20 +187,21 @@ function* getMyInformation(api: any, action: any) {
         else {
             yield put({ 
                 type: 'user/getMyInformation', 
-                payload: { isLoading: false, isError: false }
+                payload: { isLoading: false, isError: true }
             });
         }
         
     } catch (error: Error | AxiosError | any) {
         yield put({ 
             type: 'user/getMyInformation', 
-            payload: { res: {}, isLoading: false, isError: false }
+            payload: { res: {}, isLoading: false, isError: true }
         });
     }
 }
 
 export {
     signIn,
+    signInWithGoogle,
     signUp,
     signOut,
     getMyInformation

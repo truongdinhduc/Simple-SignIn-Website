@@ -22,8 +22,8 @@ export default function SignOutForm(props: SignOutFormProps) {
         dispatch({ type: 'signOut', payload: payload })
     }
 
-    useEffect(()=>{
-        if (myInformation?.username){
+    useEffect(() => {
+        if (myInformation?._id) {
             form.setFieldsValue(myInformation)
             form.setFieldValue('token', getClientCookies('token'))
         }
@@ -31,50 +31,69 @@ export default function SignOutForm(props: SignOutFormProps) {
 
     return (
         <Form form={form} >
-            
-            <div className={styles['input-label']}>Username</div>
-            <Form.Item
-                name={'username'}
-                rules={[
-                    {
-                        required: true,
-                        message: 'Enter your username!',
-                    },
-                    {
-                        min: 6,
-                        message: 'Your username must be at least 8 characters!'
-                    },
-                ]}
-            >
-                <Input
-                    className={styles['input']}
-                    placeholder='Username'
-                    type='text'
-                    disabled
-                />
-            </Form.Item>
 
-            <div className={styles['input-label']}>Password</div>
-            <Form.Item
-                name={'password'}
-                rules={[
-                    {
-                        required: true,
-                        message: 'Enter your password!',
-                    },
-                    {
-                        min: 8,
-                        message: 'Your password must be at least 8 characters!'
-                    },
-                ]}
-            >
-                <Input
-                    className={styles['input']}
-                    type='password'
-                    placeholder='Password'
-                    disabled
-                />
-            </Form.Item>
+            {myInformation?.username && <>
+                <div className={styles['input-label']}>Username</div>
+                <Form.Item
+                    name={'username'}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Enter your username!',
+                        },
+                        {
+                            min: 6,
+                            message: 'Your username must be at least 8 characters!'
+                        },
+                    ]}
+                >
+                    <Input
+                        className={styles['input']}
+                        placeholder='Username'
+                        type='text'
+                        disabled
+                    />
+                </Form.Item>
+            </>
+            }
+
+            {myInformation?.password && <>
+                <div className={styles['input-label']}>Password</div>
+                <Form.Item
+                    name={'password'}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Enter your password!',
+                        },
+                        {
+                            min: 8,
+                            message: 'Your password must be at least 8 characters!'
+                        },
+                    ]}
+                >
+                    <Input
+                        className={styles['input']}
+                        type='password'
+                        placeholder='Password'
+                        disabled
+                    />
+                </Form.Item>
+            </>
+            }
+
+            {myInformation?.email && <>
+                <div className={styles['input-label']}>Email</div>
+                <Form.Item name={'email'}>
+                    <Input
+                        className={styles['input']}
+                        type='text'
+                        placeholder='Email'
+                        disabled
+                    />
+                </Form.Item>
+            </>
+            }
 
             <div className={styles['input-label']}>JWT Token</div>
             <Form.Item

@@ -20,7 +20,7 @@ export default function SignInAndSignUpForm() {
         <div className={styles['container']}>
             {isLoading ? <div className={styles['loading']}><LoadingOutlined /></div> :
                 <div className={styles['form']}>
-                    {myInformation?.username ?
+                    {myInformation?.username || myInformation?.email ?
                         <Tabs
                             className={styles['tab']}
                             centered={true}
