@@ -36,6 +36,9 @@ export default function SignInAndSignUpForm() {
                         onChange={(tabKey) => { setActiveKey(tabKey) }}
                         activeKey={activeKey}
                         centered={true}
+                        style={{
+                            height: '100%'
+                        }}
                         items={[
                             {
                                 label: <div className={styles['tab-label']}>Sign in</div>,

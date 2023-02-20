@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 20vh;
-    bottom: 20vh;
+    top: 10vh;
+    bottom: 10vh;
     left: 0;
     right: 0;
     .form {
@@ -24,6 +24,12 @@
         :global(.ant-tabs-ink-bar){
             background-color: #4158D0;
             background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 3%, #FFCC70 99%);
+        }
+        :global(.ant-tabs-content){
+            height: 100%;
+        }
+        :global(.ant-tabs-tabpane){
+            height: 100%;
         }
     }
 }
@@ -62,4 +68,20 @@
 .input-label {
     color: white;
     margin-bottom: 5px;
+}
+
+.sign-in-with {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    .text {
+        color: white;
+        text-align: center;
+    }
+
+    .button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
 }
