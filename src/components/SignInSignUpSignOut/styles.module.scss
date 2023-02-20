@@ -79,6 +79,15 @@
 .input-label {
     color: white;
     margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    .show-hide{
+        color: rgba(255, 255, 255, 0.325);
+        &:hover {
+            color: white;
+            cursor: pointer;
+        }
+    }
 }
 
 .sign-in-with {

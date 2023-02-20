@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Tabs, Form, Input, Button } from 'antd'
 import styles from './styles.module.scss'
 import { LoadingOutlined } from '@ant-design/icons';
@@ -12,6 +12,8 @@ export default function SignOutForm(props: SignOutFormProps) {
     const { } = props
     const dispatch = useDispatch()
     const [form] = Form.useForm()
+    const [showPassword, setShowPassword] = useState(false)
+    const [showToken, setShowToken] = useState(false)
 
     const { res: myInformation, isLoading } = useSelector<RootState, any>(
         (state) => state.user?.myInformation ?? {}
@@ -28,6 +30,14 @@ export default function SignOutForm(props: SignOutFormProps) {
             form.setFieldValue('token', getClientCookies('token'))
         }
     }, [myInformation])
+
+    const onShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
+
+    const onShowToken = () => {
+        setShowToken(!showToken)
+    }
 
     return (
         <Form form={form} >
@@ -58,7 +68,12 @@ export default function SignOutForm(props: SignOutFormProps) {
             }
 
             {myInformation?.password && <>
-                <div className={styles['input-label']}>Password</div>
+                <div className={styles['input-label']}>
+                    <span>Password</span>
+                    <span className={styles['show-hide']} onClick={onShowPassword}>
+                        {showPassword ? 'Hide' : 'Show'}
+                    </span>
+                </div>
                 <Form.Item
                     name={'password'}
                     rules={[
@@ -74,7 +89,7 @@ export default function SignOutForm(props: SignOutFormProps) {
                 >
                     <Input
                         className={styles['input']}
-                        type='password'
+                        type={showPassword ? 'text' : 'password'}
                         placeholder='Password'
                         disabled
                     />
@@ -95,13 +110,19 @@ export default function SignOutForm(props: SignOutFormProps) {
             </>
             }
 
-            <div className={styles['input-label']}>JWT Token</div>
+            <div className={styles['input-label']}>
+                <span>JWT Token</span>
+                <span className={styles['show-hide']} onClick={onShowToken}>
+                    {showToken ? 'Hide' : 'Show'}
+                </span>
+            </div>
             <Form.Item
                 name={'token'}
             >
                 <Input
+                    id='token'
                     className={styles['input']}
-                    type='password'
+                    type={showToken ? 'text' : 'password'}
                     placeholder='Token'
                     disabled
                 />
