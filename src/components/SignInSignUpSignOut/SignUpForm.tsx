@@ -27,16 +27,15 @@ export default function SignUpForm(props: SignUpFormProps) {
             <Form.Item
                 name={'username'}
                 rules={[
-                    {
-                        required: true,
-                        message: 'Enter your username!',
-                    },
                     () => ({
                         validator(rule, value) {
                             const res = /^[a-z0-9_\.]+$/.exec(value);
                             if (!value || !!res) {
                                 if (size(value) >= 6 && size(value) <= 32) {
                                     return Promise.resolve();
+                                }
+                                else if (size(value) == 0) {
+                                    return Promise.reject('Enter your username!');
                                 }
                                 else if (size(value) < 6) {
                                     return Promise.reject('Your username must be at least 6 characters!');
