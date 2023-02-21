@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { map } from "lodash";
 
 const callAPISuccessfully = (response: AxiosResponse) => {
     return response.status === 201 || response.status === 200;
@@ -6,7 +7,7 @@ const callAPISuccessfully = (response: AxiosResponse) => {
 
 const assignObject = (object:any, newObject:any) => {
     let oldObject = object
-    Object.keys(newObject).map((key:any)=>{
+    map(Object.keys(newObject), (key:any)=>{
         oldObject[key] = newObject[key]
     })
     return oldObject

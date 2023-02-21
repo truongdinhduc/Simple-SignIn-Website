@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Tabs, Form, Input, Button } from 'antd'
 import styles from './styles.module.scss'
 import { LoadingOutlined } from '@ant-design/icons';
+import { size } from 'lodash'
 
 export declare interface SignUpFormProps { }
 
@@ -25,16 +26,28 @@ export default function SignUpForm(props: SignUpFormProps) {
         <Form form={form} >
             <Form.Item
                 name={'username'}
-                //label={<Text text='Username' className='medium'/>}
                 rules={[
                     {
                         required: true,
                         message: 'Enter your username!',
                     },
-                    {
-                        min: 6,
-                        message: 'Your username must be at least 8 characters!'
-                    },
+                    () => ({
+                        validator(rule, value) {
+                            const res = /^[a-z0-9_\.]+$/.exec(value);
+                            if (!value || !!res) {
+                                if (size(value) >= 6 && size(value) <= 32) {
+                                    return Promise.resolve();
+                                }
+                                else if (size(value) < 6) {
+                                    return Promise.reject('Your username must be at least 6 characters!');
+                                }
+                                else if (size(value) > 32) {
+                                    return Promise.reject('Your username is too long!');
+                                }
+                            }
+                            return Promise.reject('Invalid username!');
+                        },
+                    }),
                 ]}
             >
                 <Input
@@ -46,7 +59,6 @@ export default function SignUpForm(props: SignUpFormProps) {
 
             <Form.Item
                 name={'password'}
-                //abel={<Text text='Password' className='medium'/>}
                 rules={[
                     {
                         required: true,
@@ -67,7 +79,6 @@ export default function SignUpForm(props: SignUpFormProps) {
 
             <Form.Item
                 name={'confirm_password'}
-                //label={<Text text='Confirm password' className='medium'/>}
                 rules={[
                     {
                         required: true,

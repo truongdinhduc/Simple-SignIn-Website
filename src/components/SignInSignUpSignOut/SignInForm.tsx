@@ -5,6 +5,7 @@ import { Form, Input } from 'antd'
 import styles from './styles.module.scss'
 import { LoadingOutlined } from '@ant-design/icons';
 import SignInWithGoogle from '../SignInWithGoogle'
+import { size } from 'lodash'
 
 export declare interface SignInFormProps {
     changeForm?: () => void
@@ -34,23 +35,35 @@ export default function SignInForm(props: SignInFormProps) {
                             required: true,
                             message: 'Enter your username!',
                         },
-                        {
-                            min: 6,
-                            message: 'Your username must be at least 8 characters!'
-                        },
+                        () => ({
+                            validator(rule, value) {
+                                const res = /^[a-z0-9_\.]+$/.exec(value);
+                                if (!value || !!res) {
+                                    if (size(value) >= 6 && size(value) <= 32) {
+                                        return Promise.resolve();
+                                    }
+                                    else if (size(value) < 6) {
+                                        return Promise.reject('Your username must be at least 6 characters!');
+                                    }
+                                    else if (size(value) > 32) {
+                                        return Promise.reject('Your username is too long!');
+                                    }
+                                }
+                                return Promise.reject('Invalid username!');
+                            },
+                        }),
                     ]}
                 >
                     <Input
                         className={styles['input']}
                         placeholder='Username'
-                        type='text'
+                        type=''
 
                     />
                 </Form.Item>
 
                 <Form.Item
                     name={'password'}
-                    //abel={<Text text='Password' className='medium'/>}
                     rules={[
                         {
                             required: true,
