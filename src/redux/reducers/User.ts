@@ -20,15 +20,15 @@ const reducer = createReducer(
         })
 
         .addCase(signInWithGoogle, (state, action) => {
-            state.signIn = assignObject(state.signIn, action.payload)
+            state.signInWithGoogle = assignObject(state.signInWithGoogle, action.payload)
         })
 
         .addCase(signUp, (state, action) => {
-            state.signUp = assignObject(state.signIn, action.payload)
+            state.signUp = assignObject(state.signUp, action.payload)
         })
 
         .addCase(getMyInformation, (state, action) => {
-            state.myInformation = assignObject(state.signIn, action.payload)
+            state.myInformation = assignObject(state.myInformation, action.payload)
         })
     }
 )

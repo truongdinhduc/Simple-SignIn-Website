@@ -20,6 +20,10 @@ export default function SignInForm(props: SignInFormProps) {
         (state) => state.user?.signIn ?? {}
     )
 
+    const { isLoading: authorizing } = useSelector<RootState, any>(
+        (state) => state.user?.signInWithGoogle ?? {}
+    )
+
     const onSignIn = async () => {
         let payload = await form.validateFields()
         dispatch({ type: 'signIn', payload: payload })
@@ -100,7 +104,12 @@ export default function SignInForm(props: SignInFormProps) {
             </Form>
             <div className={styles['sign-in-with']}>
                 <div className={styles['text']}>Or sign in with</div>
-                <div className={styles['button']}><SignInWithGoogle /></div>
+                <div className={styles['button']}>
+                    {authorizing ?
+                        <div className={styles['loading']}><LoadingOutlined /></div> :
+                        <SignInWithGoogle />
+                    }
+                </div>
             </div>
         </div>
     )

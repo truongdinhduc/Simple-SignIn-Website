@@ -60,7 +60,7 @@ function* signInWithGoogle(api: any, action: any) {
                 isLoading: true
             }
         });
-        console.log(payload)
+
         const response: AxiosResponse = yield call(api.signInWithGoogle, payload);
         
         if (callAPISuccessfully(response)){

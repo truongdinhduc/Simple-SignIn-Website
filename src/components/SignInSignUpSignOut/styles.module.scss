@@ -103,5 +103,9 @@
         display: flex;
         justify-content: center;
         margin-top: 20px;
+        .loading {
+            color: white;
+            font-size: 40px;
+        }
     }
 }
